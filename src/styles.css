@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #fff!important;
+}
+.example-full-width {
+    width: 100%;
+  }
+  .topBox {
+    width: 100%;
+    min-height: 30px;
+    background-color: gray;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 2px;
+    padding: 5px;
+  }
+  
+  .formBox {
+    padding: 5px 20px;
+  }
+  
+  .heading {
+    border-left: 4px solid #808080;
+    padding-left: 5px;
+  }
+  
+  .imgDiv{width: 130px;height: 140px;border: 1px solid #897b7b;margin-bottom: 5px;}
+  .imgDivsub{width: 130px;height: 30px;border: 1px solid #897b7b;margin-bottom: 5px;}

@@ -1,0 +1,111 @@
+<style>
+    .toolbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      background-color: #1976d2;
+      color: white;
+      font-weight: 600;
+      width: 100%;
+      padding: 0px 10px;
+    }
+  
+    .content {
+      display: flex;
+      margin: 82px auto 32px;
+      padding: 0 16px;
+      max-width: 960px;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .logo {
+      width: 100%;
+    }
+  
+    .profile {
+      text-align: right;
+      width: 100%;
+    }
+  
+    footer {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      line-height: 20px;
+    }
+  
+    footer a {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+  
+  <!-- Toolbar -->
+  
+  <div class="container-fluid">
+    <div class="toolbar" role="banner">
+      <div class="logo">Logo</div>
+      <div class="profile">Profile</div>
+    </div>
+  </div>
+  
+  <div class="content" role="main">
+    <div class="container">
+      <div class="topBox">Stedent Admission From - Calendar Batch -2020</div>
+      <h5 class="text-center mt-2">Your Registration is Succesful  And Your Registration Number is:{{applicationNumber}}. Plese Upload Required Certificates</h5>
+      <div class="formBox">
+        <form class="pt-2 pr-2">
+          <div class="row">
+            <h5 class="col-12 mt-2 mb-2 heading">Upload Documents(Scanned)</h5>
+           
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Photo</h6></div>
+                <div class="col-6 mt-2"> 
+                  <div class="imgDiv"></div>
+                  <input type="file" id="myfile" name="myfile" (change)="onChange($event,'Photo')">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Signature</h6></div>
+                <div class="col-6 mt-2"><div class="imgDivsub"></div> <input type="file" id="myfile" name="myfile" (change)="onChange($event,'signature')" ></div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Aadhar Card</h6></div>
+                <div class="col-6 mt-2"> <input type="file" id="myfile" name="myfile" (change)="onChange($event,'aadharNumber')"></div>
+              </div>
+              <div class="row">
+                <div class="col-6 mt-2"><h6>SSC/Birth Certificate</h6></div>
+                <div class="col-6 mt-2"> <input type="file" id="myfile" name="myfile" (change)="onChange($event,'ssc_birthcertificate')" ></div>
+              </div>
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Provisional/OD Certificate</h6></div>
+                <div class="col-6 mt-2"> <input type="file" id="myfile" name="myfile" (change)="onChange($event,'provisional_odcertificate')" ></div>
+              </div>
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Consolicate/Marks Memo</h6></div>
+                <div class="col-6 mt-2"> <input type="file" id="myfile" name="myfile" (change)="onChange($event,'consoledate_marksmemo')" ></div>
+              </div>
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Cast Certificate</h6></div>
+                <div class="col-6 mt-2"> <input type="file" id="myfile" name="myfile" (change)="onChange($event,'castCertificate')" ></div>
+              </div>
+            </div>
+           
+  
+            <div class="col-12 mt-2 mb-2 mt-4 text-center"><Button variant="contained" (click)="uploadDocuments()">Upload</Button> </div>
+          </div>
+        </form>
+      </div>
+    </div> 
+  </div>
+  
+ 
+  

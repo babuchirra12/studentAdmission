@@ -1,0 +1,426 @@
+<style>
+  .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    width: 100%;
+    padding: 0px 10px;
+  }
+
+  .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    width: 100%;
+  }
+
+  .profile {
+    text-align: right;
+    width: 100%;
+  }
+
+  footer {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+  }
+
+  footer a {
+    display: flex;
+    align-items: center;
+  }
+
+</style>
+
+<!-- Toolbar -->
+
+<div class="container-fluid">
+  <div class="toolbar" role="banner">
+    <div class="logo">Logo</div>
+    <div class="profile">Profile</div>
+  </div>
+</div>
+<div class="content" role="main">
+  <div class="container">
+    <div class="topBox">Stedent Admission From - Calendar Batch -2020</div>
+    <div  class="formBox">
+      <form #admissionForm="ngForm" (ngSubmit)="gotoDetails(admissionForm)" class="pt-2 pr-2"  novalidate>
+        <div class="row">
+          <h5 class="col-12 mt-2 mb-2 heading">Admission Details</h5>
+          <div class="col-3 mt-2">
+            <h6>Admission Category</h6>
+          </div>
+          <div class="col-9 mt-2">
+            <label><input type="radio" class="radio-inline" id="a1"  [(ngModel)]="admissionDetails.admissionCategory" name="admission"  value="DIRECT_ADMISSION" /><span class="outside"><span
+                  class="inside"></span></span>Direct
+              Admission
+            </label>  
+            <label><input type="radio" class="radio-inline" id="a2" name="admission1"  [(ngModel)]="admissionDetails.admissionCategory" value="THROUGH_I_CET"  /><span class="outside"><span
+                  class="inside"></span></span>Through
+              i-CET
+            </label>
+            <label><input type="radio" class="radio-inline"  id="a3" name="admission2" [(ngModel)]="admissionDetails.admissionCategory" value="THROUGH_CDE_CET" /><span class="outside"><span
+                  class="inside"></span></span>Through
+              CDE-CET
+            </label>
+            <label><input type="radio" class="radio-inline" id="a4" name="admission3"  [(ngModel)]="admissionDetails.admissionCategory" value="EXPERIENCE" /><span class="outside"><span
+                  class="inside"></span></span>Experience
+            </label>
+          </div>
+
+          <h5 class="mt-2 col-12 mb-2 heading">Details of The Course</h5>
+
+          <div class="col-6 mt-3">
+
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Category Category</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.courseCategory" required  name="category1" (ngModelChange)="onCourseCategory($event)">
+                <mat-option *ngFor="let course of courseCategories" [value]=course>{{course.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Course Applied</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.courseApplied" required  name="courseApplied1">
+                <mat-option *ngFor="let courseApplied of courseAppliedList" [value]=courseApplied>{{courseApplied.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Medimum of instruction </mat-label>
+              <mat-select [(ngModel)]="admissionDetails.mediumOfInstruction" required  name="mediumum">
+                <mat-option value="Telugu">Telugu</mat-option>
+                <mat-option value="English">English</mat-option>
+                <mat-option value="Hindi">Hindi</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <h5 class="mt-2 col-12 mb-2 heading">Details of Qualifying Examination Passed</h5>
+          <div class="col-6 mt-3">
+
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Qualifying Exam Passed</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.qualifiedExamDetails.qualifiedExamDetailsLookup" required   name="qualifiedExam" (ngModelChange)="onQualifiedExamDetails($event)">
+                <mat-option *ngFor="let qualifiedExam of qualifiedExamDetails" [value]=qualifiedExam>{{qualifiedExam.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Main Subject</mat-label>
+            
+                <mat-select [(ngModel)]="admissionDetails.qualifiedExamDetails.mainSubjet1"  required  name="subject">
+                  <mat-option *ngFor="let subject of subjects" [value]=subject >{{subject}}</mat-option>
+                </mat-select>
+              
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Group Subject 2</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.qualifiedExamDetails.groupSubject2" name="mainSubjet2">
+            </mat-form-field>
+            
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Group Subject 3</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.qualifiedExamDetails.groupSubject3" name="mainSubjet3">
+            </mat-form-field>
+            
+          </div>
+          
+
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Year of Passing</mat-label>
+              <mat-select required  [(ngModel)]="admissionDetails.qualifiedExamDetails.yearOfPassing" name="yearOfPassing">
+                <mat-option value="2021-2022">2021-2022</mat-option>
+                <mat-option value="2022-2023">2022-2023</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Registered No</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.qualifiedExamDetails.regdNoOfQualifiedExam" name="regdNoOfQualifiedExam">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Name of the Board</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.qualifiedExamDetails.university" required  name="university">
+                <mat-option *ngFor="let university of universities" [value]=university>{{university.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Aggregate Marks </mat-label>
+              <input matInput #aggregate maxlength="3" minlength="0" required  [(ngModel)]="admissionDetails.qualifiedExamDetails.aggregateMarks" name="aggregateMarks" >
+            </mat-form-field>
+          </div>
+
+          <h5 class="mt-2 col-12 mb-2 heading">Learner Support Center (LSC)</h5>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>LSC District</mat-label>
+              <mat-select  [(ngModel)]="admissionDetails.lscDistrict" required  name="skillcenter" (ngModelChange)="onSkillCenters($event)" >
+                <mat-option *ngFor="let skillcenter of skillCenters" [value]=skillcenter>{{skillcenter.district}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>LSC Name</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.lscName" required  name="skillsCenterColleges"  >
+                <mat-option *ngFor="let college of skillsCenterColleges" [value]=college >{{college}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <h5 class="mt-2 col-12 mb-2 heading">Student Details</h5>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Name of the Student </mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.studentName" name="studentname" >
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Father's Name </mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.fatherName" name="fatherName">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Mother's Name </mat-label>
+              <input matInput type="text" required   [(ngModel)]="admissionDetails.studentDetails.motherName" name="motherName">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Gender</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.studentDetails.gender" required  name="gender">
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Marital Status</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.studentDetails.maritalStatus" required  name="maritalStatus">
+                <mat-option value="Single">Single</mat-option>
+                <mat-option value="Married">Married</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Date of Birth as per</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.studentDetails.dobAsPer" required  name="dobAsPer">
+                <mat-option value="SSC">SSC</mat-option>
+                <mat-option value="PAN">PAN</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Date of Birth </mat-label>
+              <input matInput type="text"  placeholder="dd-mm-yyyy"  [(ngModel)]="admissionDetails.studentDetails.dob" required  name="dob">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Caste Category</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.studentDetails.casteCategory" required  name="casteCategory">
+                <mat-option value="SC">SC</mat-option>
+                <mat-option value="ST">ST</mat-option>
+                <mat-option value="BC">BC</mat-option>
+                <mat-option value="OC">OC</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Religion</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.studentDetails.religion" required  name="religion">
+                <mat-option value="Hindu">Hindu</mat-option>
+                <mat-option value="Muslim">Muslim</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Nationality</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.studentDetails.nationality" required  name="Nationality">
+                <mat-option value="Indian">Indian</mat-option>
+                <mat-option value="Others">Others</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Aadhar Number </mat-label>
+              <input matInput type="text" [(ngModel)]="admissionDetails.studentDetails.aadharNumner" required  name="aadharNumner">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Physically Challnged</mat-label>
+              <mat-select [(ngModel)]="admissionDetails.studentDetails.physicallyChallenged" required  name="physicallyChallenged">
+                <mat-option value=true>Yes</mat-option>
+                <mat-option value=false>No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+
+          <h5 class="mt-2 col-12 mb-2 heading">Communication Details</h5>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>C/o</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.communicationDetails.careOf" name="careOf">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Door Number </mat-label>
+              <input matInput type="text"  required  [(ngModel)]="admissionDetails.studentDetails.communicationDetails.doorNumner" name="doorNumner">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Street Name</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.communicationDetails.streetName" name="streetName">
+            </mat-form-field>
+          </div>
+         
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Village/ Town</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.communicationDetails.villageName" name="villageName">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Mandal/ Block</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.communicationDetails.mandal" name="mandal">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>State</mat-label>
+              <input matInput type="text" required   [(ngModel)]="admissionDetails.studentDetails.communicationDetails.state" name="state">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>District</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.communicationDetails.district" name="district" >
+            </mat-form-field>
+          </div>
+
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Country</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.communicationDetails.county" name="county">
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Pin Code</mat-label>
+              <input matInput type="tel"  maxlength="5" required  [(ngModel)]="admissionDetails.studentDetails.communicationDetails.pincode" name="pincode">
+            </mat-form-field>
+          </div>
+
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput type="tel"  maxlength="10" required  [(ngModel)]="admissionDetails.studentDetails.mobile" name="mobile" >
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.email" name="email">
+            </mat-form-field>
+          </div>
+         
+          <h5 class="mt-2 col-12 mb-2 heading">Other Details</h5>
+          <div class="col-8 mt-2">
+            <h6>Are you studying any other course offred by CDE, ANU at present</h6>
+          </div>
+          <div class="col-4 mt-2">
+            <label><input type="radio" class="radio-inline" name="radios1" [(ngModel)]="admissionDetails.studentDetails.anuStudent" value=true  /><span class="outside"><span
+                  class="inside"></span></span>Yes
+            </label>
+            <label><input type="radio" class="radio-inline" name="radios2" [(ngModel)]="admissionDetails.studentDetails.anuStudent" value=false /><span class="outside"><span
+                  class="inside"></span></span>No
+            </label>
+          </div>
+         
+          
+          <div class="col-6 mt-2">
+            <h6>Options for Study Material Dispatch</h6>
+          </div>
+          <div class="col-6 mt-2">
+            <label><input type="radio" class="radio-inline" name="Dispatch1" value="Personally" [(ngModel)]="admissionDetails.studentDetails.materialDispatch" /><span class="outside"><span
+                  class="inside"></span></span>I will personally Come to ANU-CDE and collect the material
+            </label>
+            <label><input type="radio" class="radio-inline" name="Dispatch2" value="To_Communication_Address"  [(ngModel)]="admissionDetails.studentDetails.materialDispatch" /><span class="outside"><span
+                  class="inside"></span></span>Send the Study Material to my communication address
+            </label>
+            <label><input type="radio" class="radio-inline" name="Dispatch3" value="LearnerSupportCenter" [(ngModel)]="admissionDetails.studentDetails.materialDispatch"  /><span class="outside"><span
+              class="inside"></span></span>Send the Study Material to Learner Support Center
+        </label>
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Station</mat-label>
+              <input matInput type="text" required  [(ngModel)]="admissionDetails.studentDetails.station" name="station" >
+            </mat-form-field>
+          </div>
+          <div class="col-6 mt-3">
+           
+          </div>
+          <div class="col-6 mt-3">
+            <mat-form-field appearance="fill" class="example-full-width">
+              <mat-label>Date</mat-label>
+              <input matInput type="text" placeholder="dd-mm-yyyy"  required  [(ngModel)]="admissionDetails.studentDetails.date" name="date">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <button type="submit" [disabled]="!admissionForm.valid" class="btn mt-3 btn-primary" >Preview</button>
+        <button type="button"  class="btn mt-3 btn-primary" (click)="paymntProcss()" >Paymnt Procss</button>
+      </form>
+    </div>
+  </div>
+
+
+</div>
+
+

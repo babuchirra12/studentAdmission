@@ -1,0 +1,324 @@
+<style>
+    .toolbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      background-color: #1976d2;
+      color: white;
+      font-weight: 600;
+      width: 100%;
+      padding: 0px 10px;
+    }
+  
+    .content {
+      display: flex;
+      margin: 82px auto 32px;
+      padding: 0 16px;
+      max-width: 960px;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .logo {
+      width: 100%;
+    }
+  
+    .profile {
+      text-align: right;
+      width: 100%;
+    }
+  
+    footer {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      line-height: 20px;
+    }
+  
+    footer a {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+  
+  <!-- Toolbar -->
+  
+  <div class="container-fluid">
+    <div class="toolbar" role="banner">
+      <div class="logo">Logo</div>
+      <div class="profile">Profile</div>
+    </div>
+  </div>
+  
+  <div class="content" role="main">
+    <div class="container">
+      <div class="topBox">Stedent Admission From - Calendar Batch -2020</div>
+      <div class="formBox">
+        <form class="pt-2 pr-2">
+          <div class="row" *ngIf="studentDetails != null">
+            <h5 class="col-12 mt-2 mb-2 heading">Admission Details</h5>
+            <div class="col-6 mt-2">
+              <h6>Admission Category</h6>
+            </div>
+            <div class="col-6 mt-2">{{ studentDetails.admissionCategory}}</div>
+
+            <h5 class="mt-2 col-12 mb-2 heading">Details of The Course</h5>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Course Category</h6></div>
+                <div class="col-6 mt-2">{{ studentDetails.courseCategory.name}}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Couese Appied</h6></div>
+                <div class="col-6 mt-2">{{  studentDetails.courseApplied.name}}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Medium of instruction</h6></div>
+                <div class="col-6 mt-2">{{ studentDetails.mediumOfInstruction}}</div>
+              </div>
+            </div>
+  
+            <h5 class="col-12 mt-2 mb-2 heading">Deatils of Qualifying Examination passed</h5>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Qualifying Exam Passed</h6></div>
+                <div class="col-6 mt-2">{{ studentDetails.qualifiedExamDetails.qualifiedExamDetailsLookup.name}}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Main Subject</h6></div>
+                <div class="col-6 mt-2">{{ studentDetails.qualifiedExamDetails.mainSubjet1}}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Group Subject 2</h6></div>
+                <div class="col-6 mt-2">{{studentDetails.qualifiedExamDetails.groupSubject2}}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Group Subject 3</h6></div>
+                <div class="col-6 mt-2">{{studentDetails.qualifiedExamDetails.groupSubject3}}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Yar of Passing</h6></div>
+                <div class="col-6 mt-2">{{studentDetails.qualifiedExamDetails.yearOfPassing}}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Registered No</h6></div>
+                <div class="col-6 mt-2">{{studentDetails.qualifiedExamDetails.regdNoOfQualifiedExam}}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+              <div class="row">
+                <div class="col-6 mt-2"><h6>Name of the Board</h6></div>
+                <div class="col-6 mt-2">{{studentDetails.qualifiedExamDetails?.university?.name }}</div>
+              </div>
+            </div>
+            <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Aggrgate Marks</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.qualifiedExamDetails.aggregateMarks }}</div>
+                </div>
+              </div>
+
+              <h5 class="col-12 mt-2 mb-2 heading">Learner Support Center (LSC)</h5>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>LSC District</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.lscDistrict.district}}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>LSC Name</h6></div>
+                  <div class="col-6 mt-2">{{ studentDetails.lscName}}</div>
+                </div>
+              </div>
+
+              <h5 class="col-12 mt-2 mb-2 heading">Student Details</h5>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Name of the Student</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.studentName   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Father's Name</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.fatherName   }}</div>
+                </div>
+              </div>
+
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Mother's Name</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.motherName   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Gender</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.gender   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Marital Status</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.maritalStatus   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Date of Birth as per</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.dobAsPer   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Date of Birth</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.dob  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Caste Category</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.casteCategory   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Religion</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.religion   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Nationality</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.nationality   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Aadhar Number</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.aadharNumner   }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Physically Challenged</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.physicallyChallenged == true ? 'Yes': 'No' }}</div>
+                </div>
+              </div>
+
+              <h5 class="col-12 mt-2 mb-2 heading">Communication Details</h5>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>C/o</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.careOf  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Door Number</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.doorNumner  }}</div>
+                </div>
+              </div>
+
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Street Name</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.streetName  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Villege/Town</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.villageName  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Mandal/Block</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.mandal  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>State</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.state  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>District</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.district  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Country</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.county  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Pin Code</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.communicationDetails.pincode  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Mobile Number</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.mobile  }}</div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Email</h6></div>
+                  <div class="col-6 mt-2">{{studentDetails.studentDetails.email  }}</div>
+                </div>
+              </div>
+             
+              <h5 class="col-12 mt-2 mb-2 heading"> Other Details</h5>
+              <div class="col-12 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Are you studying any other course offred by CDE, ANU at present</h6></div>
+                  <div class="col-6 mt-2">{{ studentDetails.studentDetails.anuStudent == true ? 'Yes': 'No'}}</div>
+                </div>
+              </div>
+              <div class="col-12 mt-2">
+                <div class="row">
+                  <div class="col-6 mt-2"><h6>Options for Study Material Dispatch</h6></div>
+                  <p class="col-6 mt-2" [hidden]="studentDetails.studentDetails.materialDispatch==='Personally'">I will personally Come to ANU-CDE and collect the material</p>
+                  <p class="col-6 mt-2" [hidden]="studentDetails.studentDetails.materialDispatch==='To_Communication_Address'" >Send the Study Material to my communication address</p>
+                  <p class="col-6 mt-2" [hidden]="studentDetails.studentDetails.materialDispatch==='LearnerSupportCenter'">Send the Study Material to Learner Support Center</p>
+                </div>
+              </div>
+
+           
+              <button type="button"  class="btn mt-1 btn-primary"  (click)="submitAdmissionDetails()">Continue to Upload Documents</button>
+              <button type="button"  class="btn mt-1 btn-primary" (click)="gotoEditDetails()" >Change Details</button>
+             
+              
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  
